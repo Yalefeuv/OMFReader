@@ -25,6 +25,13 @@ class RecordDecoder {
 	private boolean isDummyAhead(int index){
 		return readLengthAhead(index) < 2;
 	}
+	private byte calculateChecksum(int index, int length){
+		int res=data[index];
+		int i=1;
+		while(i<length+2)
+			res +=data[index+i++];
+		return (byte) (-res);
+	}
 	Record decode(int index) {
 		Record res;
 		int length = readLengthAhead(index);
@@ -34,6 +41,7 @@ class RecordDecoder {
 			byte checksum =data[index+length+2];
 			res = buildRecord(type, content);
 			res.setChecksum(checksum);
+			res.setCalculatedChecksum(calculateChecksum(index, length));
 		}else {
 			res =new DummyRecord();
 		}
