@@ -1,5 +1,6 @@
 OMFReader
 =========
+**Project no longer maintained because my primary goal (export data from https://github.com/id-Software/wolf3d/tree/master/WOLFSRC/OBJ) is achieved**
 
 A tool to read Object Module Files.
 
